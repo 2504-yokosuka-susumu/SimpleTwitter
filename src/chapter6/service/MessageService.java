@@ -78,7 +78,7 @@ public class MessageService {
 			 * 整数型に型変換し、idに代入
 			 */
 			Integer id = null;
-			if(!StringUtils.isEmpty(userId)) {
+			if (!StringUtils.isEmpty(userId)) {
 				id = Integer.parseInt(userId);
 			}
 

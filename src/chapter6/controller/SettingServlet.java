@@ -75,9 +75,7 @@ public class SettingServlet extends HttpServlet {
 				log.warning("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
 				errorMessages.add("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
 			}
-		}
-
-		if (errorMessages.size() != 0) {
+		} else {
 			request.setAttribute("errorMessages", errorMessages);
 			request.setAttribute("user", user);
 			request.getRequestDispatcher("setting.jsp").forward(request, response);
@@ -116,14 +114,20 @@ public class SettingServlet extends HttpServlet {
 		String account = user.getAccount();
 		String email = user.getEmail();
 
+		User userAccount = new UserService().select(user.getAccount());
+
 		if (!StringUtils.isEmpty(name) && (20 < name.length())) {
 			errorMessages.add("名前は20文字以下で入力してください");
 		}
+
 		if (StringUtils.isEmpty(account)) {
 			errorMessages.add("アカウント名を入力してください");
 		} else if (20 < account.length()) {
 			errorMessages.add("アカウント名は20文字以下で入力してください");
+		} else if ((userAccount != null) && (userAccount.getId() != user.getId())) {
+			errorMessages.add("すでに存在するアカウントです");
 		}
+
 		if (!StringUtils.isEmpty(email) && (50 < email.length())) {
 			errorMessages.add("メールアドレスは50文字以下で入力してください");
 		}

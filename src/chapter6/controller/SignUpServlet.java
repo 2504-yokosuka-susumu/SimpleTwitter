@@ -64,6 +64,7 @@ public class SignUpServlet extends HttpServlet {
 			request.getRequestDispatcher("signup.jsp").forward(request, response);
 			return;
 		}
+
 		new UserService().insert(user);
 		response.sendRedirect("./");
 	}
@@ -96,6 +97,8 @@ public class SignUpServlet extends HttpServlet {
 		String password = user.getPassword();
 		String email = user.getEmail();
 
+		User userAccount = new UserService().select(user.getAccount());
+
 		if (!StringUtils.isEmpty(name) && (20 < name.length())) {
 			errorMessages.add("名前は20文字以下で入力してください");
 		}
@@ -104,6 +107,8 @@ public class SignUpServlet extends HttpServlet {
 			errorMessages.add("アカウント名を入力してください");
 		} else if (20 < account.length()) {
 			errorMessages.add("アカウント名は20文字以下で入力してください");
+		} else if (userAccount != null) {
+			errorMessages.add("すでに存在するアカウントです");
 		}
 
 		if (StringUtils.isEmpty(password)) {
