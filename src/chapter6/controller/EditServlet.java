@@ -50,31 +50,16 @@ public class EditServlet extends HttpServlet {
 
 		String id = request.getParameter("message.id");
 
-		for(int i = 0; i < id.length(); i++) {
-			if(Character.isDigit(id.charAt(i))) {
-				continue;
-	        } else {
-	        	errorMessages.add("不正なパラメータが入力されました");
-	        	session.setAttribute("errorMessages", errorMessages);
-	    		response.sendRedirect("./");
-	    		return;
-	        }
+		Message message = null;
+
+		if(!StringUtils.isBlank(id) && id.matches("^[0-9]+$")) {
+			message = new MessageService().select(Integer.parseInt(id));
 		}
-
-		if(StringUtils.isBlank(id)) {
-			errorMessages.add("不正なパラメータが入力されました");
-        	session.setAttribute("errorMessages", errorMessages);
-    		response.sendRedirect("./");
-    		return;
-		}
-
-		Message message = new MessageService().select(Integer.parseInt(id));
-
-		if(message == null){
+		if(message == null) {
 			errorMessages.add("不正なパラメータが入力されました");
 			session.setAttribute("errorMessages", errorMessages);
-			response.sendRedirect("./");
-			return;
+    		response.sendRedirect("./");
+    		return;
 		}
 
 		request.setAttribute("message", message);
