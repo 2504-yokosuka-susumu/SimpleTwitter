@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import chapter6.beans.Comment;
 import chapter6.beans.UserComment;
 import chapter6.dao.CommentDao;
+import chapter6.dao.UserCommentDao;
 import chapter6.logging.InitApplication;
 
 public class CommentService {
@@ -70,7 +71,7 @@ public class CommentService {
 		try {
 			connection = getConnection();
 
-			List<UserComment> comments = new CommentDao().select(connection, LIMIT_NUM);
+			List<UserComment> comments = new UserCommentDao().select(connection, LIMIT_NUM);
 			commit(connection);
 
 			return comments;

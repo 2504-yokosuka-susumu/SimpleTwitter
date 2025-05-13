@@ -25,8 +25,8 @@
 	</div>
 
 	<form action="./" method="get">
-		日付：<input type="date" id="start" name="start" value="${start}"></input>～
-		<input type="date" id="end" name="end" value="${end}"></input>
+		日付：<input type="date" id="start" name="start" value="${start}">～
+		<input type="date" id="end" name="end" value="${end}">
 		<input type="submit" value="絞込">
 	</form>
 
