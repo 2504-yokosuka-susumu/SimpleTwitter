@@ -28,7 +28,7 @@ public class LoginFilter implements Filter {
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
 
-		if(loginUser != null) {
+		if (loginUser != null) {
 			chain.doFilter(request, response); // サーブレットを実行
 		} else {
 			// エラーメッセージ追加

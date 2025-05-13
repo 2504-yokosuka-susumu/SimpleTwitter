@@ -116,13 +116,13 @@ public class MessageService {
 			Calendar cl = Calendar.getInstance();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
 
-			if(start != null && !start.isEmpty()) {
+			if (StringUtils.isNotBlank(start)) {
 				startTime = start + " 00:00:00";
 			} else {
 				startTime = "2020/01/01 00:00:00";
 			}
 
-			if(end != null && !end.isEmpty()) {
+			if (StringUtils.isNotBlank(end)) {
 				endTime = end + " 23:59:59";
 			} else {
 				endTime = String.valueOf(sdf.format(cl.getTime()));
